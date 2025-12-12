@@ -25,7 +25,7 @@ int SDL_Engine::initalizeEngine()
     }
 
     SDL_Log("Creating Window");
-    _gameWindow = SDL_CreateWindow("SDL2 Test", 100, 100, 800, 600, SDL_WINDOW_SHOWN);
+    _gameWindow = SDL_CreateWindow("SDL2 Test", 100, 100, 400, 800, SDL_WINDOW_SHOWN);
 
     if (!_gameWindow)
     {
@@ -67,6 +67,7 @@ int SDL_Engine::startUpdateCycle()
     SceneManagment->setActiveScene("Test");
 
     Uint64 lastTime = SDL_GetTicks64(); 
+    SDL_Log("Started Delta Time");
 
     while (IsRunning)
     {
@@ -113,10 +114,10 @@ int SDL_Engine::startUpdateCycle()
 
 void SDL_Engine::update()
 {
-    SceneManagment.get()->activeScene->updateScene();
+    SceneManagment->activeScene->updateScene();
 }
 
 void SDL_Engine::draw()
 {
-    SceneManagment.get()->activeScene->drawScene();
+    SceneManagment->activeScene->drawScene();
 }

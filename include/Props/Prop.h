@@ -23,6 +23,8 @@ class Prop
     
     virtual ~Prop();
 
+    virtual void start();
+
     virtual void draw();
 
     virtual void update();
@@ -35,7 +37,7 @@ class Prop
 
     protected:
 
-    bool Started = false;
+    bool _started = false;
 
 
 

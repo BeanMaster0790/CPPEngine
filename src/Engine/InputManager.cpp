@@ -10,7 +10,6 @@ void InputManager::updateKeys()
         lastKeys[i] = currentKeys[i];
         currentKeys[i] = keys[i];
     }
-    
 }
 
 bool InputManager::isKeyHeld(SDL_Scancode key)

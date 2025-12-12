@@ -1,6 +1,7 @@
 #pragma once
 
 #include <math.h>
+#include <string>
    
 struct Vector2
 {
@@ -20,4 +21,6 @@ struct Vector2
     Vector2 operator*(const float by);
 
     Vector2 operator+(const Vector2& by);
+
+    std::string ToString();
 };

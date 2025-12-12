@@ -34,3 +34,8 @@ Vector2 Vector2::operator+(const Vector2& by)
 {
     return Vector2{ X + by.X, Y + by.Y };
 }
+
+std::string Vector2::ToString()
+{
+    return std::to_string(X) + "," + std::to_string(Y);
+}
