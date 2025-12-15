@@ -14,10 +14,7 @@ class Sprite : public WorldProp
 
     void loadTexture(std::string path);
 
+    static void loadTexture(std::string path, SDL_Texture*& texture, int* texWidth, int* texHeight);
+
     void removeFromGame() override;
-
-    protected:
-
-    int _textureWidth;
-    int _textureHeight;
 };

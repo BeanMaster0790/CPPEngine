@@ -1,5 +1,8 @@
 #include "Props/Prop.h"
 #include <SDL2/SDL.h>
+#include <memory>
+#include <vector>
+#include "Addons/Addon.h"
 
 Prop::Prop() {}
 
@@ -15,23 +18,18 @@ void Prop::update()
     }
 }
 
+
 void Prop::lateUpdate() {};
 
 void Prop::removeFromGame() 
 {
+    ToRemove = true;
     
+    IsActive = false;
+    IsVisible = false;
 }
 
 void Prop::start() 
 {
     _started = true;
-}
-
-
-void Prop::destroy()
-{
-    ToRemove = true;
-
-    IsActive = false;
-    IsVisible = false;
 }

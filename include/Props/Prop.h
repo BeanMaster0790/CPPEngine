@@ -2,6 +2,10 @@
 
 #include <string>
 #include <SDL2/SDL.h>
+#include <vector>
+#include <memory>
+#include <unordered_map>
+#include <functional>
 
 class Scene;
 
@@ -33,12 +37,8 @@ class Prop
 
     virtual void removeFromGame();
 
-    virtual void destroy();
-
     protected:
 
     bool _started = false;
-
-
 
 };

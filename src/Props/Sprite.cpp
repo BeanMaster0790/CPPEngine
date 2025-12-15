@@ -6,11 +6,19 @@
 
 void Sprite::draw() 
 {
-    SDL_Rect drawRect = {static_cast<int>(Position.X), static_cast<int>(Position.Y), _textureWidth, _textureHeight};
+    SDL_Rect drawRect = {static_cast<int>(Position.X), static_cast<int>(Position.Y), Width, Height};
     SDL_RenderCopy(SDL_Engine::GameRenderer, Texture, nullptr, &drawRect);
 }
 
 void Sprite::loadTexture(std::string path)
+{
+    if(Texture)
+        SDL_DestroyTexture(Texture);
+
+    loadTexture(path, Texture, &Width, &Height);
+}
+
+void Sprite::loadTexture(std::string path, SDL_Texture*& texture, int* texWidth, int* texHeight)
 {
     SDL_Log("Loading image %s", path.c_str());
     SDL_Surface* surf = IMG_Load(path.c_str());
@@ -18,31 +26,33 @@ void Sprite::loadTexture(std::string path)
     if(!surf)
     {
         SDL_Log("Image failed to load : %s e: %s", path.c_str(), IMG_GetError());
-        Texture = nullptr;
+        texture = nullptr;
     }
 
-    Texture = SDL_CreateTextureFromSurface(SDL_Engine::GameRenderer, surf);
+    texture = SDL_CreateTextureFromSurface(SDL_Engine::GameRenderer, surf);
     SDL_FreeSurface(surf);
 
-    if (!Texture) 
+    if (!texture) 
     {
         SDL_Log("Failed to create texture from %s: %s", path.c_str(), SDL_GetError());
-        Texture = nullptr;
+        texture = nullptr;
     }
 
-    if(!Texture)
+    if(!texture)
     {
         SDL_Log("WARNING! The loadTexture function failed to load a texture. Be preprated for unexpected issues!");
     }
     else
     {
-        SDL_QueryTexture(Texture, nullptr, nullptr, &_textureWidth, &_textureHeight);
+        SDL_QueryTexture(texture, nullptr, nullptr, texWidth, texHeight);
         SDL_Log("Image %s has been loaded", path.c_str());
     }
 }
 
 void Sprite::removeFromGame()
 {
+    WorldProp::removeFromGame();
+
     SDL_DestroyTexture(Texture);
     Texture = nullptr;
 }

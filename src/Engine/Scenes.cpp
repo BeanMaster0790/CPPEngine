@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include "Engine/Scenes.h"
 #include "Props/Prop.h"
+#include <algorithm>
 
 Scene::Scene(std::string sceneName) : SceneName(sceneName) {}
 
@@ -12,6 +13,11 @@ void Scene::updateScene()
 {
     for(auto& prop : _props)
     {
+        if(!prop->PropScene)
+        {
+            prop->PropScene = this;
+        }
+
         prop->update();
     }
 
@@ -19,6 +25,10 @@ void Scene::updateScene()
     {
         prop->lateUpdate();
     }
+
+    _props.erase(std::remove_if(_props.begin(), _props.end(), [](const auto& prop){ return prop->ToRemove; }), _props.end());
+
+
 }
 
 void Scene::drawScene()

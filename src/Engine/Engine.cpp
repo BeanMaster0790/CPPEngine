@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include <iostream>
+#include <fmt/core.h>
 #include "Engine/Engine.h"
 #include "Engine/Scenes.h"
 #include "Scenes/TestScene.h"
@@ -69,15 +70,20 @@ int SDL_Engine::startUpdateCycle()
     Uint64 lastTime = SDL_GetTicks64(); 
     SDL_Log("Started Delta Time");
 
+    
     while (IsRunning)
     {
         Uint64 currentTime = SDL_GetTicks64();
-
+        
         Uint64 miliseondsPassed = currentTime - lastTime;
-
+        
         DeltaTime = miliseondsPassed / 1000.0f;
 
+        SDL_SetWindowTitle(_gameWindow, fmt::format("Jumpy Carrot | FPS: {}", 
+            std::to_string(static_cast<int>(1 / DeltaTime))).c_str());
+
         lastTime = currentTime;
+
 
         while (SDL_PollEvent(&e))
         {
@@ -88,7 +94,7 @@ int SDL_Engine::startUpdateCycle()
         }
 
         SDL_RenderPresent(GameRenderer);
-        SDL_SetRenderDrawColor(GameRenderer, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(GameRenderer, 42, 86, 213, 255);
         SDL_RenderClear(GameRenderer);
 
         InputManagment->updateKeys();
