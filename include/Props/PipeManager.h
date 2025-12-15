@@ -16,9 +16,12 @@ class PipeManager : public Prop
     Pipe* _topSecondPipe;
     Pipe* _bottomSecondPipe;
 
+    int _baseTopPipePos = 0;
+    int _baseBottomPipePos = 520;
+
     public:
 
-    float PipeMoveSpeed = -170;
+    float PipeMoveSpeed = -250;
 
     void start() override;
 

@@ -10,7 +10,7 @@ void Carrot::update()
 
     if(SDL_Engine::InputManagment->wasKeyPressed(SDL_SCANCODE_SPACE))
     {
-        Velocity.Y = -400;
+        Velocity.Y = -300;
     }
 
     Position.Y += Velocity.Y * SDL_Engine::DeltaTime;

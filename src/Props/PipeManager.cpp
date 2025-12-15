@@ -14,10 +14,12 @@ void PipeManager::start()
     _bottomSecondPipe = &PropScene->createProp<Pipe>(true, this);
 
     SDL_Log("Setting Positions...");
-    _topFirstPipe->Position = Vector2(400, 0);
-    _bottomFirstPipe->Position = Vector2(400, 520);
-    _topSecondPipe->Position = Vector2(800, 0);
-    _bottomSecondPipe->Position = Vector2(800, 520);
+    _topFirstPipe->Position = Vector2(400, _baseTopPipePos);
+    _bottomFirstPipe->Position = Vector2(400, _baseBottomPipePos);
+    _topSecondPipe->Position = Vector2(800, _baseTopPipePos);
+    _bottomSecondPipe->Position = Vector2(800, _baseBottomPipePos);
+
+    srand(time(0));
 }
 
 void PipeManager::update() 
@@ -28,12 +30,40 @@ void PipeManager::update()
     {
         _topFirstPipe->Position.X = 800;
         _bottomFirstPipe->Position.X = 800;
+
+        int randomYOffset = rand() % 100;
+
+        if(rand() % 2 == 0)
+        {
+            _topFirstPipe->Position.Y = _baseTopPipePos + randomYOffset;
+            _bottomFirstPipe->Position.Y = _baseBottomPipePos + randomYOffset;
+
+        }
+        else
+        {
+            _topFirstPipe->Position.Y = _baseTopPipePos - randomYOffset;
+            _bottomFirstPipe->Position.Y = _baseBottomPipePos - randomYOffset;
+        }
     }
 
     if(_topSecondPipe->Position.X < -128)
     {
         _topSecondPipe->Position.X = 800;
         _bottomSecondPipe->Position.X = 800;
+
+        int randomYOffset = rand() % 250;
+
+        if(rand() % 2 == 0)
+        {
+            _topSecondPipe->Position.Y = _baseTopPipePos + randomYOffset;
+            _bottomSecondPipe->Position.Y = _baseBottomPipePos + randomYOffset;
+
+        }
+        else
+        {
+            _topSecondPipe->Position.Y = _baseTopPipePos - randomYOffset;
+            _bottomSecondPipe->Position.Y = _baseBottomPipePos - randomYOffset;
+        }
     }
 }
 

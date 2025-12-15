@@ -10,7 +10,7 @@ class Carrot : public Sprite
 
     Vector2 Velocity;
 
-    float Gravity = 8.5f;
+    float Gravity = 10.5f;
 
     void start() override;
     void update() override;
